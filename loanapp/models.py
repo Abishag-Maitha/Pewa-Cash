@@ -1,71 +1,45 @@
-import uuid
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
-from django.utils.translation import gettext as _
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-import datetime as dt
+from loginApp.models import CustomerSignUp
+import uuid
 
 # Create your models here.
-class Account(models.Model):  
-    Full_Name=models.CharField(max_length=100)
-    photo = CloudinaryField('image')
-    email = models.EmailField(max_length=30, blank=True)
-    user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='account')
-    MobileNo=models.PositiveIntegerField()
-    ID_card=CloudinaryField('image')
-    datecreated= models.DateField(auto_now_add=True )
+class loanCategory(models.Model):
+    loan_name = models.CharField(max_length=250)
+    creation_date = models.DateField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.user.username} Account'
-
-    @receiver(post_save, sender=User)
-    def create_user_account(sender, instance, created, **kwargs):
-        if created:
-            Account.objects.create(user=instance)
-    
-    @receiver(post_save, sender=User)
-    def save_user_account(sender, instance, **kwargs):
-        instance.account.save()
- 
-    def save_account(self):
-        self.user
-
-    def delete_account(self):
-        self.delete()
+        return self.loan_name
 
 
-LOAN_LIMITS = [
-(1,'5000'),
-(2,'10000'),
-(3,'15000'),
-(4,'20000'),
-(5,'25000'),
-(6,'30000'),
+class loanRequest(models.Model):
+    customer = models.ForeignKey(CustomerSignUp, on_delete=models.CASCADE, related_name='loan_customer')
+    category = models.ForeignKey(loanCategory, on_delete=models.CASCADE, null=True)
+    request_date = models.DateField(auto_now_add=True)
+    status_date = models.CharField(max_length=150, null=True, blank=True, default=None)
+    reason = models.TextField()
+    status = models.CharField(max_length=100, default='pending')
+    amount = models.PositiveIntegerField(default=0)
+    year = models.PositiveIntegerField(default=1)
 
-]
-LOAN_TERM = [
-(1,'1'),
-(2,'3'),
-(3,'4'),
-(4,'6'),
-]
-
-class Loan(models.Model):
-    Loan_Amount=models.PositiveIntegerField(choices = LOAN_LIMITS,default= 0)
-    user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='loan')
-    Loan_Term=models.IntegerField(choices=LOAN_TERM, default=0)
-    date_borrowed=models.DateField(auto_now_add=True)
-    rate = models.DecimalField(max_digits=20, decimal_places=2)
-    
     def __str__(self):
-            return self.user.username
-    
-    def save_profile(self):
-            self.user
+        return self.customer.user.username
 
-class Payment(models.Model):
-   user = models.OneToOneField(User,on_delete=models.CASCADE, related_name='payment')
-   loan=models.OneToOneField(Loan, on_delete=models.CASCADE, related_name='payment')
-   Amount=models.DecimalField(max_digits=20, decimal_places=2)
+
+class CustomerLoan(models.Model):
+    customer = models.ForeignKey(CustomerSignUp, on_delete=models.CASCADE, related_name='loan_user')
+    total_loan = models.PositiveIntegerField(default=0)
+    payable_loan = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.customer.user.username
+
+class loanTransaction(models.Model):
+    customer = models.ForeignKey(CustomerSignUp, on_delete=models.CASCADE, related_name='transaction_customer')
+    transaction = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    payment = models.PositiveIntegerField(default=0)
+    payment_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.customer.user.username
