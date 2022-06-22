@@ -7,8 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-# Create your views here.
 
+# Create your views here.
 
 def sign_up_view(request):
     error = ''
@@ -20,7 +20,7 @@ def sign_up_view(request):
     if request.method == 'POST':
 
         form = CustomerSignUpForm(request.POST)
-        # print(form.cleaned_data['username'])
+       
         if form.is_valid():
             user = form.save()
 
@@ -51,9 +51,7 @@ def login_view(request):
     form = CustomerLoginForm()
     if request.method == 'POST':
         form = CustomerLoginForm(data=request.POST)
-        # username = request.POST['username']
-        # password = request.POST['password']
-        # print(username, password)
+      
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -86,6 +84,6 @@ def edit_customer(request):
             customer = form.save(commit=False)
             customer.save()
             return HttpResponseRedirect(reverse('home'))
-    # return HttpResponseRedirect(reverse('home'))
+   
     return render(request, 'loginApp/edit.html', context={'form': form})
 
