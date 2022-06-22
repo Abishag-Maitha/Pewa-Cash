@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Account, Loan, Payment
 
+
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = '__all__'
+        fields = ['Full_Name', 'MobileNo', 'ID_card']
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
@@ -23,7 +24,7 @@ class UserAccountUpdateForm(forms.ModelForm):
 class LoanForm(forms.ModelForm):
     class Meta:
         model = Loan
-        fields = '__all__'
+        fields = ['Loan_Amount','Loan_Term']
 
 class PaymentForm(forms.ModelForm):
     class Meta:
