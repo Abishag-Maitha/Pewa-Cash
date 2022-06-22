@@ -1,4 +1,7 @@
-{%extends "base.html"%} {% load bootstrap4 %} {% load static %} {% block content %}
+{%extends "base.html"%} 
+{% load bootstrap4 %} 
+{% load static %} 
+{% block content %}
 
 <div class="container" style="font-family: 'Jost', sans-serif;">
     <div class="row">
@@ -8,7 +11,7 @@
             {% if form.errors %}
             <p> Some Information Might be Incorrect </p>
             {% endif %}
-            <div class="panel panel-default card p-5 mt-5 mb-5" style="background-color:#e1c699;">
+            <div class="panel panel-default p-5 mt-5 mb-5">
 
                 <div class="panel-heading">
                     <h3 class="text-center" style="color:#4b1223;">Sign Up</h3>
