@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Account, Loan,Payment
+from .models import loanRequest, loanCategory, CustomerLoan, loanTransaction
 
-# Register your models here.
-admin.site.register(Account)
-admin.site.register(Loan)
-admin.site.register(Payment)
+# Register your models here.loanCategory,
+admin.site.register(loanRequest)
+admin.site.register(loanCategory)
+admin.site.register(loanTransaction)
+admin.site.register(CustomerLoan)
