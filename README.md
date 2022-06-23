@@ -53,8 +53,7 @@ Email: abishag.maitha@student.moringaschool.com
 Contact: 0719816825
 
 ## Super User Credentials
-Username: pendo
-Password: pendo123
+
 
 
 ## Live Link
