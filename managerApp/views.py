@@ -53,12 +53,9 @@ def dashboard(request):
     requestLoan = loanRequest.objects.all().filter(status='pending').count(),
     approved = loanRequest.objects.all().filter(status='approved').count(),
     rejected = loanRequest.objects.all().filter(status='rejected').count(),
-    totalLoan = CustomerLoan.objects.aggregate(Sum('total_loan'))[
-        'total_loan__sum'],
-    totalPayable = CustomerLoan.objects.aggregate(
-        Sum('payable_loan'))['payable_loan__sum'],
-    totalPaid = loanTransaction.objects.aggregate(Sum('payment'))[
-        'payment__sum'],
+    totalLoan = CustomerLoan.objects.aggregate(Sum('total_loan'))['total_loan__sum'],
+    totalPayable = CustomerLoan.objects.aggregate(Sum('payable_loan'))['payable_loan__sum'],
+    totalPaid = loanTransaction.objects.aggregate(Sum('payment'))['payment__sum'],
 
     dict = {
         'totalCustomer': totalCustomer[0],
@@ -130,11 +127,8 @@ def approved_request(request, id):
 
     else:
 
-        
-
         # CustomerLoan 
         save_loan = CustomerLoan()
-
         save_loan.customer = approved_customer
         save_loan.total_loan = int(loan_obj.amount)
         save_loan.payable_loan = int(loan_obj.amount)+int(loan_obj.amount)*0.12*int(year)
