@@ -6,8 +6,8 @@ from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, HttpResponse
 
 from django.db.models import Sum
-# Create your views here.
 
+# Create your views here.
 
 def home(request):
 
@@ -29,20 +29,6 @@ def LoanRequest(request):
 
     return render(request, 'loanApp/loanrequest.html', context={'form': form})
 
-    # reason = request.POST.get('reason')
-    # amount = request.POST.get('amount')
-    # category = request.POST.get('category')
-    # year = request.POST.get('year')
-    # customer = request.user.customer
-
-    # loan_request = LoanRequest(request)
-    # loan_request.customer = customer
-    # loan_request.save()
-    # if form.is_valid():
-    #     loan_request = form.save(commit=False)
-    #     loan_request.customer = request.user.customer
-    #     print(loan_request)
-    #     return redirect('/')
 
 @login_required(login_url='/account/login-customer')
 def LoanPayment(request):
@@ -53,7 +39,7 @@ def LoanPayment(request):
             payment = form.save(commit=False)
             payment.customer = request.user.customer
             payment.save()
-            # pay_save = loanTransaction()
+          
             return redirect('/')
 
     return render(request, 'loanApp/payment.html', context={'form': form})
@@ -88,7 +74,6 @@ def UserDashboard(request):
     totalPaid = loanTransaction.objects.filter(customer=request.user.customer).aggregate(Sum('payment'))[
         'payment__sum'],
     
-
     dict = {
         'request': requestLoan[0],
         'approved': approved[0],
@@ -96,12 +81,9 @@ def UserDashboard(request):
         'totalLoan': totalLoan[0],
         'totalPayable': totalPayable[0],
         'totalPaid': totalPaid[0],
-        
-
     }
 
     return render(request, 'loanApp/user_dashboard.html', context=dict)
-
 
 def error_404_view(request, exception):
     print("not found")

@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('account/', include('loginApp.urls')),
     path('loan/', include('loanapp.urls')),
-    path('manager/', include('adminApp.urls')),
+    path('manager/', include('managerApp.urls')),
 
 ]
 urlpatterns += staticfiles_urlpatterns()
