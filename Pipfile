@@ -12,6 +12,11 @@ gunicorn = "*"
 psycopg2 = "*"
 cloudinary = "*"
 whitenoise = "*"
+django-widget-tweaks = "*"
+django-jazzmin = "*"
+django-mathfilters = "*"
+django-cleanup = "*"
+pillow = "*"
 
 [dev-packages]
 
