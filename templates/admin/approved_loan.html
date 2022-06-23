@@ -13,7 +13,7 @@
 {% block body_block %}
 
 <div class="container">
-    <h1 class="text-center text-primary">Approved Loan</h1>
+    <h1 class="text-center text-primary">Approved Loans</h1>
     <div class="users my-5">
 
         <table class="table table-light table-hover table-bordered table-striped text-center">
@@ -46,10 +46,9 @@
                             {{loan.status}}
                         </button>
                     </td>
-                    <!-- <td> <img src="/media/{{user.profile_picture}}" alt="Profile Pic" height="40px" width="40px" />
-                    </td> -->
+                  
                     <td>{{loan.category}}</td>
-                    <td>Kshs. {{loan.amount}}</td>
+                    <td>{{loan.amount}}</td>
                     <td>{{loan.request_date}}</td>
                     <td>{{loan.status_date}}</td>
                     <td>{{loan.year}}</td>

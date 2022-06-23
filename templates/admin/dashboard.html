@@ -57,30 +57,28 @@
             <div class="col-md-4 ">
                 <div class="deposit status">
                     <h3>Total Customers</h3>
-                    <h1> <span id="digit">{{totalCustomer}}</span> </h1>
+                    <p> <span id="digit">{{totalCustomer}}</span> </p>
                 </div>
 
             </div>
             <div class="col-md-4">
                 <div class="withdraw status">
-                    <h3>Request Pending</h3>
-                    <h1> <span id='digit'>{{request}}</span> </h1>
+                    <h3>Requests Pending</h3>
+                    <p> <span id='digit'>{{request}}</span> </p>
                 </div>
 
             </div>
             <div class="col-md-4 ">
                 <div class="bg-info status">
-                    <h3>Loan Approved</h3>
-                    <h1><span id="digit">{{approved}}</span>
-
-                    </h1>
+                    <h3>Loans Approved</h3>
+                    <p><span id="digit">{{approved}}</span></p>
                 </div>
 
             </div>
             <div class="col-md-4 ">
                 <div class="status" style="background-color:#95CEFF">
-                    <h3>Loan Rejected</h3>
-                    <h1><span id="digit">{{rejected}}</span></h1>
+                    <h3>Loans Rejected</h3>
+                    <p><span id="digit">{{rejected}}</span></p>
                 </div>
 
             </div>
@@ -89,9 +87,9 @@
                     <h3>Total Payable Loan</h3>
 
                     {% if totalPayable %}
-                    <h1><span id="digit">Kshs. {{ totalPayable|sub:0 }}</span></h1>
+                    <p><span id="digit">{{ totalPayable|sub:0 }}</span></p>
                     {% else %}
-                    <h1><span id="digit">Kshs.0</span></h1>
+                    <p><span id="digit">0</span></p>
                     {% endif %}
                 </div>
 
@@ -101,9 +99,9 @@
                     <h3>Total Approved Loan</h3>
 
                     {% if totalLoan %}
-                    <h1><span id="digit">Kshs. {{totalLoan|sub:0}}</span></h1>
+                    <p><span id="digit">{{totalLoan|sub:0}}</span></p>
                     {% else %}
-                    <h1><span id="digit">Kshs. 0</span></h1>
+                    <p><span id="digit">0</span></p>
                     {% endif %}
                 </div>
 
@@ -112,9 +110,9 @@
                 <div class="status" style="background-color:#EF5350">
                     <h3>Total Paid Loan</h3>
                     {% if totalPaid %}
-                    <h1><span id="digit">Kshs. {{totalPaid|sub:0}}</span></h1>
+                    <p><span id="digit">{{totalPaid|sub:0}}</span></p>
                     {% else %}
-                    <h1><span id="digit">Kshs. 0</span></h1>
+                    <p><span id="digit">0</span></p>
                     {% endif %}
                 </div>
 
@@ -125,11 +123,11 @@
                     <h3>Total Due Loan</h3>
 
                     {% if totalPayable and totalPaid %}
-                    <h1><span id="digit">Kshs. {{ totalPayable|sub:totalPaid }}</span></h1>
+                    <p><span id="digit">{{ totalPayable|sub:totalPaid }}</span></p>
                     {% elif totalPayable %}
-                    <h1><span id="digit">Kshs. {{ totalPayable|sub:0 }}</span></h1>
+                    <p><span id="digit">{{ totalPayable|sub:0 }}</span></p>
                     {% else %}
-                    <h1><span id="digit">Kshs. 0</span></h1>
+                    <p><span id="digit">0</span></p>
                     {% endif %}
                 </div>
 

@@ -44,13 +44,10 @@ def LoanPayment(request):
 
     return render(request, 'loanApp/payment.html', context={'form': form})
 
-
 @login_required(login_url='/account/login-customer')
 def UserTransaction(request):
-    transactions = loanTransaction.objects.filter(
-        customer=request.user.customer)
+    transactions = loanTransaction.objects.filter(customer=request.user.customer)
     return render(request, 'loanApp/user_transaction.html', context={'transactions': transactions})
-
 
 @login_required(login_url='/account/login-customer')
 def UserLoanHistory(request):
@@ -61,18 +58,12 @@ def UserLoanHistory(request):
 @login_required(login_url='/account/login-customer')
 def UserDashboard(request):
 
-    requestLoan = loanRequest.objects.all().filter(
-        customer=request.user.customer).count(),
-    approved = loanRequest.objects.all().filter(
-        customer=request.user.customer).filter(status='approved').count(),
-    rejected = loanRequest.objects.all().filter(
-        customer=request.user.customer).filter(status='rejected').count(),
-    totalLoan = CustomerLoan.objects.filter(customer=request.user.customer).aggregate(Sum('total_loan'))[
-        'total_loan__sum'],
-    totalPayable = CustomerLoan.objects.filter(customer=request.user.customer).aggregate(
-        Sum('payable_loan'))['payable_loan__sum'],
-    totalPaid = loanTransaction.objects.filter(customer=request.user.customer).aggregate(Sum('payment'))[
-        'payment__sum'],
+    requestLoan = loanRequest.objects.all().filter(customer=request.user.customer).count(),
+    approved = loanRequest.objects.all().filter(customer=request.user.customer).filter(status='approved').count(),
+    rejected = loanRequest.objects.all().filter(customer=request.user.customer).filter(status='rejected').count(),
+    totalLoan = CustomerLoan.objects.filter(customer=request.user.customer).aggregate(Sum('total_loan'))['total_loan__sum'],
+    totalPayable = CustomerLoan.objects.filter(customer=request.user.customer).aggregate(Sum('payable_loan'))['payable_loan__sum'],
+    totalPaid = loanTransaction.objects.filter(customer=request.user.customer).aggregate(Sum('payment'))['payment__sum'],
     
     dict = {
         'request': requestLoan[0],
